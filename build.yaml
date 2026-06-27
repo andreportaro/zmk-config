@@ -19,7 +19,20 @@
 #
 ---
 include:
+  # Standard split mode: left half is USB central
   - board: nice_nano
     shield: lily58_left
   - board: nice_nano
     shield: lily58_right
+
+  # Dongle mode: dedicated USB dongle is central, both halves are BLE peripherals.
+  # Flash lily58_dongle    → the dongle board
+  # Flash lily58_left_dongle_mode  → left half (peripheral only)
+  # Flash standard lily58_right    → right half (already a peripheral, no change)
+  - board: nice_nano
+    shield: lily58_dongle
+    artifact-name: lily58_dongle
+  - board: nice_nano
+    shield: lily58_left
+    cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
+    artifact-name: lily58_left_dongle_mode
