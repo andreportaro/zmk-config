@@ -23,10 +23,5 @@ include:
     shield: lily58_left
   - board: nice_nano//zmk
     shield: lily58_right
-  # Debug build: right half with logging over USB serial (for soft-off debugging)
-  - board: nice_nano//zmk
-    shield: lily58_right
-    snippet: zmk-usb-logging
-    artifact-name: lily58_right_usb_logging
   - board: nice_nano//zmk
     shield: settings_reset
