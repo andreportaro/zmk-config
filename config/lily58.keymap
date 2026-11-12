@@ -13,11 +13,12 @@
     behaviors {
         // Hold for 2s, then release, to put both halves into System OFF.
         // Wake up by pressing the reset button on each half.
-        hold_soft_off: hold_soft_off {
+        // Node name must be <= 8 chars: it is sent to the right half over BLE
+        // and longer names get truncated, so the peripheral can't find it.
+        pwr_off: pwr_off {
             compatible = "zmk,behavior-soft-off";
             #binding-cells = <0>;
-            // Experiment: split-peripheral-off-on-press removed so the right
-            // half turns off on release (same as the left) instead of on press.
+            split-peripheral-off-on-press;
             hold-time-ms = <2000>;
         };
     };
@@ -51,7 +52,7 @@
 // |       |     |     |      |      |      |        |  |       |      |  _    |  +    |  {   |   }   |  "|"  |
 //                     |      |      |      |        |  |       |      |       |       |
             bindings = <
-&bt BT_CLR &bt BT_SEL 0     &bt BT_SEL 1      &bt BT_SEL 2      &bt BT_SEL 3 &bt BT_SEL 4                 &trans    &trans    &trans    &trans    &trans    &hold_soft_off
+&bt BT_CLR &bt BT_SEL 0     &bt BT_SEL 1      &bt BT_SEL 2      &bt BT_SEL 3 &bt BT_SEL 4                 &trans    &trans    &trans    &trans    &trans    &pwr_off
 &kp F1    &kp F2           &kp F3            &kp F4            &kp F5       &kp F6                       &kp F7    &kp F8    &kp F9    &kp F10   &kp F11   &kp F12
 &kp GRAVE  &kp EXCL         &kp AT            &kp HASH          &kp DOLLAR   &kp PRCNT                    &kp CARET &kp AMPS  &kp ASTRK &kp LPAR  &kp RPAR  &kp TILDE 
 &trans     &ext_power EP_ON &ext_power EP_OFF &ext_power EP_TOG &trans       &trans    &trans   &trans    &trans    &kp MINUS &kp PLUS  &kp LBRC  &kp RBRC  &kp PIPE
