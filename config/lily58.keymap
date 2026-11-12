@@ -16,7 +16,8 @@
         hold_soft_off: hold_soft_off {
             compatible = "zmk,behavior-soft-off";
             #binding-cells = <0>;
-            split-peripheral-off-on-press;
+            // Experiment: split-peripheral-off-on-press removed so the right
+            // half turns off on release (same as the left) instead of on press.
             hold-time-ms = <2000>;
         };
     };
